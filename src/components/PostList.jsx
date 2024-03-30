@@ -21,7 +21,11 @@ export default function PostList({ isPosting, onStopPosting })
         <>
             { isPosting &&
                 <Modal onClose={onStopPosting} >
-                    <NewPost onBodychange={changeBodyHandler} onAuthorChange={changeAuthorHandler}/>
+                    <NewPost
+                        onBodychange={changeBodyHandler}
+                        onAuthorChange={changeAuthorHandler}
+                        isCancel={onStopPosting}
+                    />
                 </Modal>
             }
             <ul className={classes.posts}>
