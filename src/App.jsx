@@ -4,7 +4,7 @@ import PostList from "./components/PostList.jsx";
 import {useState} from "react";
 
 function App() {
-    const [modalIsVisible, setModalIsVisible] = useState(true) //init state
+    const [modalIsVisible, setModalIsVisible] = useState(false) //init state
     function hideModalHandler() {
         setModalIsVisible(false);
     }
