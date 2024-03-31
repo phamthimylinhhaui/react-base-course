@@ -18,8 +18,9 @@ function NewPost(props) {
             author: enteredAuthor,
             body: enteredBody,
         }
+
+        props.addPost(post)
         props.isCancel();
-        console.log(post)
     }
 
     return (
