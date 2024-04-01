@@ -16,7 +16,7 @@ function NewPost(props) {
         e.preventDefault();
         const post = {
             author: enteredAuthor,
-            desc: enteredBody,
+            body: enteredBody,
         }
 
         props.addPost(post)

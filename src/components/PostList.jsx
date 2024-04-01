@@ -10,6 +10,13 @@ export default function PostList({ isPosting, onStopPosting })
     const [posts, setPosts] = useState([]);
     function addPostHandler(postData) {
         // setPosts([postData, ...posts]);
+        fetch('http://localhost:8080/posts', {
+            method: 'post',
+            body: JSON.stringify(postData),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
         setPosts(() => [postData, ...posts]);
     }
 
@@ -26,7 +33,7 @@ export default function PostList({ isPosting, onStopPosting })
             {posts.length > 0 && (
                 <ul className={classes.posts}>
                     {posts.map((post, index) => (
-                        <Post key={index} author={post.author} desc={post.desc}/>
+                        <Post key={index} author={post.author} body={post.author}/>
                     ))}
                 </ul>
             )}
