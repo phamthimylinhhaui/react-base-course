@@ -2,11 +2,25 @@ import Post from "./Post.jsx";
 import classes from "./PostList.module.css"
 import NewPost from "./NewPost.jsx";
 import Modal from "./Modal.jsx";
-import {useState} from "react";
+import { useState, useEffect } from "react";
 
 // eslint-disable-next-line react/prop-types
 export default function PostList({ isPosting, onStopPosting })
 {
+    // fetch('http://localhost:8080/posts').then(res => res.json()).then(data => {
+    //     setPosts(data.posts)
+    // })
+
+    useEffect(() => {
+        async function fetchPost() {
+            const res = await fetch('http://localhost:8080/posts');
+            const resData = await res.json();
+            setPosts(resData.posts)
+        }
+
+        fetchPost();
+    }, []);
+
     const [posts, setPosts] = useState([]);
     function addPostHandler(postData) {
         // setPosts([postData, ...posts]);
