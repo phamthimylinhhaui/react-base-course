@@ -7,15 +7,15 @@ import { useState, useEffect } from "react";
 // eslint-disable-next-line react/prop-types
 export default function PostList({ isPosting, onStopPosting })
 {
-    // fetch('http://localhost:8080/posts').then(res => res.json()).then(data => {
-    //     setPosts(data.posts)
-    // })
+    const [isFetching, setIsFetching] = useState(false);
 
     useEffect(() => {
         async function fetchPost() {
+            setIsFetching(true);
             const res = await fetch('http://localhost:8080/posts');
             const resData = await res.json();
             setPosts(resData.posts)
+            setIsFetching(false);
         }
 
         fetchPost();
@@ -44,7 +44,8 @@ export default function PostList({ isPosting, onStopPosting })
                     />
                 </Modal>
             }
-            {posts.length > 0 && (
+
+            { !isFetching && posts.length > 0 && (
                 <ul className={classes.posts}>
                     {posts.map((post, index) => (
                         <Post key={index} author={post.author} body={post.author}/>
@@ -52,10 +53,16 @@ export default function PostList({ isPosting, onStopPosting })
                 </ul>
             )}
 
-            {posts.length === 0 && (
+            { !isFetching && posts.length === 0 && (
                 <div style={{textAlign: 'center'}}>
                     <h2>There are no posts yet.</h2>
                     <p>Start adding some!</p>
+                </div>
+            )}
+
+            { isFetching && (
+                <div style={{textAlign: 'center'}}>
+                    <p>Loading post ...</p>
                 </div>
             )}
         </>
