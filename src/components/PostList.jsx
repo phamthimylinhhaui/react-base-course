@@ -1,8 +1,9 @@
 import Post from "./Post.jsx";
 import classes from "./PostList.module.css"
-import NewPost from "./NewPost.jsx";
+import NewPost from "../routers/NewPost.jsx";
 import Modal from "./Modal.jsx";
 import { useState, useEffect } from "react";
+import {URL_Base} from "../constant.js";
 
 // eslint-disable-next-line react/prop-types
 export default function PostList({ isPosting, onStopPosting })
@@ -12,7 +13,7 @@ export default function PostList({ isPosting, onStopPosting })
     useEffect(() => {
         async function fetchPost() {
             setIsFetching(true);
-            const res = await fetch('http://localhost:8080/posts');
+            const res = await fetch(URL_Base +'/posts');
             const resData = await res.json();
             setPosts(resData.posts)
             setIsFetching(false);
@@ -24,7 +25,7 @@ export default function PostList({ isPosting, onStopPosting })
     const [posts, setPosts] = useState([]);
     function addPostHandler(postData) {
         // setPosts([postData, ...posts]);
-        fetch('http://localhost:8080/posts', {
+        fetch(URL_Base +'/posts', {
             method: 'post',
             body: JSON.stringify(postData),
             headers: {
@@ -36,15 +37,6 @@ export default function PostList({ isPosting, onStopPosting })
 
     return (
         <>
-            { isPosting &&
-                <Modal onClose={onStopPosting} >
-                    <NewPost
-                        isCancel={onStopPosting}
-                        addPost={addPostHandler}
-                    />
-                </Modal>
-            }
-
             { !isFetching && posts.length > 0 && (
                 <ul className={classes.posts}>
                     {posts.map((post, index) => (
