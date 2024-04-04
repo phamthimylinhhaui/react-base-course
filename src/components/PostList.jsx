@@ -1,6 +1,6 @@
 import Post from "./Post.jsx";
 import classes from "./PostList.module.css"
-import NewPost from "./NewPost.jsx";
+import NewPost from "../routers/NewPost.jsx";
 import Modal from "./Modal.jsx";
 import { useState, useEffect } from "react";
 import {URL_Base} from "../constant.js";
@@ -37,15 +37,6 @@ export default function PostList({ isPosting, onStopPosting })
 
     return (
         <>
-            { isPosting &&
-                <Modal onClose={onStopPosting} >
-                    <NewPost
-                        isCancel={onStopPosting}
-                        addPost={addPostHandler}
-                    />
-                </Modal>
-            }
-
             { !isFetching && posts.length > 0 && (
                 <ul className={classes.posts}>
                     {posts.map((post, index) => (
