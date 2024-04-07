@@ -1,30 +1,17 @@
 import Post from "./Post.jsx";
-import classes from "./PostList.module.css"
-import {URL_Base} from "../constant.js";
+import classes from "./PostList.module.css";
 import {useLoaderData} from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 export default function PostList() {
     const posts = useLoaderData();
 
-    function addPostHandler(postData) {
-        // setPosts([postData, ...posts]);
-        fetch(URL_Base + '/posts', {
-            method: 'post',
-            body: JSON.stringify(postData),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        setPosts(() => [postData, ...posts]);
-    }
-
     return (
         <>
             { posts.length > 0 && (
                 <ul className={classes.posts}>
                     {posts.map((post, index) => (
-                        <Post key={index} author={post.author} body={post.author}/>
+                        <Post key={index} author={post.author} body={post.body}/>
                     ))}
                 </ul>
             )}
