@@ -1,33 +1,27 @@
 import Post from "./Post.jsx";
-import classes from "./PostList.module.css"
-import NewPost from "./NewPost.jsx";
-import {useState} from "react";
-import Modal from "./Modal.jsx";
+import classes from "./PostList.module.css";
+import {useLoaderData} from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
-export default function PostList({ isPosting, onStopPosting })
-{
-    const [enteredBody, setEnteredBody] = useState('') //init state
-    function changeBodyHandler(e) {
-        setEnteredBody(e.target.value);
-    }
-
-    const [enteredAuthor, setEnteredAuthor] = useState('') //init state
-    function changeAuthorHandler(e) {
-        setEnteredAuthor(e.target.value);
-    }
+export default function PostList() {
+    const posts = useLoaderData();
 
     return (
         <>
-            { isPosting &&
-                <Modal onClose={onStopPosting} >
-                    <NewPost onBodychange={changeBodyHandler} onAuthorChange={changeAuthorHandler}/>
-                </Modal>
-            }
-            <ul className={classes.posts}>
-                <Post author={enteredAuthor} desc={enteredBody}/>
-                <Post author='author 2' desc='desc author2'/>
-            </ul>
+            { posts.length > 0 && (
+                <ul className={classes.posts}>
+                    {posts.map((post) => (
+                        <Post key={post.id} id={post.id} author={post.author} body={post.body}/>
+                    ))}
+                </ul>
+            )}
+
+            { posts.length === 0 && (
+                <div style={{textAlign: 'center'}}>
+                    <h2>There are no posts yet.</h2>
+                    <p>Start adding some!</p>
+                </div>
+            )}
         </>
     )
 }
