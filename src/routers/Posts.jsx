@@ -6,6 +6,7 @@ import {URL_Base} from "../constant.js";
 function Posts() {
   return (
       <>
+          {/*outlet nay la giu cho cho modal */}
           <Outlet></Outlet>
           <main>
               <PostList />
