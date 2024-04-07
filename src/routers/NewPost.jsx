@@ -1,4 +1,4 @@
-import classes from '../components/NewPost.module.css';
+import classes from './NewPost.module.css';
 import Modal from "../components/Modal.jsx";
 import {Link, Form, redirect} from "react-router-dom";
 import {URL_Base} from "../constant.js";
