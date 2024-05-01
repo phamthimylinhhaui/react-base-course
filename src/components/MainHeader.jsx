@@ -11,10 +11,13 @@ export default function MainHeader()
                 React Poster
             </h1>
             <p>
-                <Link to="/create-post" className={classes.button} >
-                    <MdPostAdd size={18}></MdPostAdd>
-                    New Post
-                </Link>
+              <Link to="/courses" className={classes.button}  style={{marginRight:16}}>
+                List course
+              </Link>
+              <Link to="/create-post" className={classes.button}>
+                <MdPostAdd size={18}></MdPostAdd>
+                New Post
+              </Link>
             </p>
         </header>
     );

@@ -6,6 +6,7 @@ import {RouterProvider, createBrowserRouter} from 'react-router-dom'
 import NewPost, { action as addNewPost } from "./routers/NewPost.jsx";
 import RootLayout from "./routers/RootLayout.jsx";
 import PostDetail, { loader as postDetailLoader } from "./routers/PostDetail.jsx";
+import Courses from './routers/Courses.jsx'
 
 const router = createBrowserRouter([
     {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
                 ],
                 loader : PostLoader
             },
+            {
+                path: '/courses',
+                element: <Courses/>
+            }
         ]
     },
 ])
