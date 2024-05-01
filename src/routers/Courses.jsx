@@ -127,12 +127,52 @@ const CourseComponent = ({course, handleClick}) => {
   );
 }
 
+const Form = {
+  Input () {
+    return (<input/>)
+  },
+  Checkbox () {
+    return (<input type="checkbox"/>)
+  },
+}
+
+const ButtonComponent = ({title, href, onClick}) => {
+  let props = {};
+  let Component = 'button';
+  if (href) {
+    Component = 'a';
+    props.href = href;
+  }
+  if (onClick) {
+    props.onClick = onClick;
+  }
+
+  return (
+    <Component {...props}>
+      {title}
+    </Component>
+  );
+}
+
 export default function Courses() {
   const handleClick = (course) => {
     console.log(course.title);
   }
+  const type = 'Input';
+  const Component = Form[type];
+
   return (
     <div>
+      <div>
+        <ButtonComponent
+          title="click me!"
+          onClick={() => console.log(Math.random())}
+          href="https://www.google.com/"
+        />
+      </div>
+      <div>
+        <Component />
+      </div>
       {courses.map(course => (
         <CourseComponent
           key={course.id}
